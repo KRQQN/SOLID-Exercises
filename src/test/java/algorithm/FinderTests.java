@@ -18,14 +18,14 @@ class FinderTests {
 
     @BeforeEach
     public void setup() {
-        sue.name = "Sue";
-        sue.birthDate = new Date(50, 0, 1);
-        greg.name = "Greg";
-        greg.birthDate = new Date(52, 5, 1);
-        sarah.name = "Sarah";
-        sarah.birthDate = new Date(82, 0, 1);
-        mike.name = "Mike";
-        mike.birthDate = new Date(79, 0, 1);
+        sue.setName("Sue");
+        sue.setBirthDate(new Date(50, 0, 1));
+        greg.setName("Greg"); //= "Greg";
+        greg.setBirthDate(new Date(52, 5, 1));
+        sarah.setName("Sarah");
+        sarah.setBirthDate(new Date(82, 0, 1));
+        mike.setName("Mike") ;
+        mike.setBirthDate(new Date(79, 0, 1));
     }
 
     @Test
@@ -33,7 +33,7 @@ class FinderTests {
         List<Person> list = new ArrayList<>();
         PersonComparer personComparer = new PersonComparer(list);
 
-        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        AgeCompare result = personComparer.findAgeDifference(AgeDifference.BIGGEST);
         assertNull(result.youngestPerson);
         assertNull(result.oldestPerson);
     }
@@ -44,7 +44,7 @@ class FinderTests {
         list.add(sue);
         PersonComparer personComparer = new PersonComparer(list);
 
-        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        AgeCompare result = personComparer.findAgeDifference(AgeDifference.BIGGEST);
         assertNull(result.youngestPerson);
         assertNull(result.oldestPerson);
     }
@@ -56,7 +56,7 @@ class FinderTests {
         list.add(greg);
         PersonComparer personComparer = new PersonComparer(list);
 
-        AgeCompare result = personComparer.Find(AgeDifference.SMALLEST);
+        AgeCompare result = personComparer.findAgeDifference(AgeDifference.SMALLEST);
         assertEquals(sue, result.youngestPerson);
         assertEquals(greg, result.oldestPerson);
     }
@@ -68,7 +68,7 @@ class FinderTests {
         list.add(greg);
         PersonComparer personComparer = new PersonComparer(list);
 
-        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        AgeCompare result = personComparer.findAgeDifference(AgeDifference.BIGGEST);
         assertEquals(greg, result.youngestPerson);
         assertEquals(mike, result.oldestPerson);
     }
@@ -82,7 +82,7 @@ class FinderTests {
         list.add(greg);
         PersonComparer personComparer = new PersonComparer(list);
 
-        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        AgeCompare result = personComparer.findAgeDifference(AgeDifference.BIGGEST);
         assertEquals(sue, result.youngestPerson);
         assertEquals(sarah, result.oldestPerson);
     }
@@ -96,7 +96,7 @@ class FinderTests {
         list.add(greg);
         PersonComparer personComparer = new PersonComparer(list);
 
-        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        AgeCompare result = personComparer.findAgeDifference(AgeDifference.BIGGEST);
         assertEquals(sue, result.youngestPerson);
         assertEquals(sarah, result.oldestPerson);
     }

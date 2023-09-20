@@ -3,8 +3,13 @@ package algorithm;
 import java.util.Date;
 
 public class Person {
-    public String name;
-    public Date birthDate;
+    private String name;
+    private Date birthDate;
+
+    public Person() {
+        this.name = "default";
+        this.birthDate = new Date();
+    }
 
     public String getName() {
         return name;
@@ -14,8 +19,8 @@ public class Person {
         this.name = name;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Long getBirthDate() {
+        return birthDate.getTime();
     }
 
     public void setBirthDate(Date birthDate) {
