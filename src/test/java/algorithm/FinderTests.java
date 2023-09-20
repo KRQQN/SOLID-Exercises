@@ -2,7 +2,6 @@ package algorithm;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class FinderTests {
 
-    Thing sue = new Thing();
-    Thing greg = new Thing();
-    Thing sarah = new Thing();
-    Thing mike = new Thing();
+    Person sue = new Person();
+    Person greg = new Person();
+    Person sarah = new Person();
+    Person mike = new Person();
 
     @BeforeEach
     public void setup() {
@@ -31,84 +30,75 @@ class FinderTests {
 
     @Test
     void Returns_Empty_Results_When_Given_Empty_List() {
-        List<Thing> list = new ArrayList<>();
-        Finder finder = new Finder(list);
+        List<Person> list = new ArrayList<>();
+        PersonComparer personComparer = new PersonComparer(list);
 
-        F result = finder.Find(FT.One);
-        assertNull(result.P1);
-
-        assertNull(result.P2);
+        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        assertNull(result.youngestPerson);
+        assertNull(result.oldestPerson);
     }
 
     @Test
     void Returns_Empty_Results_When_Given_One_Person() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(sue);
+        PersonComparer personComparer = new PersonComparer(list);
 
-        Finder finder = new Finder(list);
-
-        F result = finder.Find(FT.One);
-
-        assertNull(result.P1);
-        assertNull(result.P2);
+        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        assertNull(result.youngestPerson);
+        assertNull(result.oldestPerson);
     }
 
     @Test
     void Returns_Closest_Two_For_Two_People() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(sue);
         list.add(greg);
-        Finder finder = new Finder(list);
+        PersonComparer personComparer = new PersonComparer(list);
 
-        F result = finder.Find(FT.One);
-
-        assertEquals(sue, result.P1);
-        assertEquals(greg, result.P2);
+        AgeCompare result = personComparer.Find(AgeDifference.SMALLEST);
+        assertEquals(sue, result.youngestPerson);
+        assertEquals(greg, result.oldestPerson);
     }
 
     @Test
     void Returns_Furthest_Two_For_Two_People() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(mike);
         list.add(greg);
+        PersonComparer personComparer = new PersonComparer(list);
 
-        Finder finder = new Finder(list);
-
-        F result = finder.Find(FT.Two);
-
-        assertEquals(greg, result.P1);
-        assertEquals(mike, result.P2);
+        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        assertEquals(greg, result.youngestPerson);
+        assertEquals(mike, result.oldestPerson);
     }
 
     @Test
     void Returns_Furthest_Two_For_Four_People() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(sue);
         list.add(sarah);
         list.add(mike);
         list.add(greg);
-        Finder finder = new Finder(list);
+        PersonComparer personComparer = new PersonComparer(list);
 
-        F result = finder.Find(FT.Two);
-
-        assertEquals(sue, result.P1);
-        assertEquals(sarah, result.P2);
+        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        assertEquals(sue, result.youngestPerson);
+        assertEquals(sarah, result.oldestPerson);
     }
 
     @Test
     void Returns_Closest_Two_For_Four_People() {
-        List<Thing> list = new ArrayList<>();
+        List<Person> list = new ArrayList<>();
         list.add(sue);
         list.add(sarah);
         list.add(mike);
         list.add(greg);
+        PersonComparer personComparer = new PersonComparer(list);
 
-        Finder finder = new Finder(list);
-
-        F result = finder.Find(FT.One);
-
-        assertEquals(sue, result.P1);
-        assertEquals(greg, result.P2);
+        AgeCompare result = personComparer.Find(AgeDifference.BIGGEST);
+        assertEquals(sue, result.youngestPerson);
+        assertEquals(sarah, result.oldestPerson);
     }
 
 }
